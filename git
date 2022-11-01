@@ -1,0 +1,107 @@
+git --> is a version control tool it keeps tracking the version of files and directories.
+mkdir git
+cd git
+sudo yum install git ---> used to install git
+
+git init --> to initilase the git
+
+git status --> it is used ot chcek whether fies are in workspace or sttating area or in git repository
+
+git add filename --> this will move the file from local workspace to stagging area.
+
+git commit -m 'msg'  ---> this will move the file from stagging area to the git repository where the version will be tracked
+
+git config --global user.email "xyz@gmail.com" --> used to create the usermail
+git config --global user.name "xyz" --> used to create the user
+
+git log ---> used to check the history for thr repo.
+
+git log -1 ---> shows the latest  commit on the repository.
+
+git log -2 ---> shows the latest 2 commit on the repository.
+
+git checkout commit id or  ---> used to checkout to the previous commit or to diffrent branch or diff tag.
+
+git checkout master ---> it is used to switch to main branch
+==============================================================================================================
+
+branching : or why do we need branching
+
+ two people or two teams will work on same peace of code on two different brnaches for devloping diffrent set of features and we can integrate later by merging. or parallel devlopment
+ 
+ git branch ---> to list the branches
+ 
+ git branch branchname ---> to craete branch
+ 
+ git checkout branchname ---> to switch to other branch
+ 
+ git branch -d branchname ---> to delete the branches
+ 
+ git branch  branchnewname  brancholdname ---> to create the new branch using old branch
+ 
+ git merge branchname ---> to merge to master branch.
+ 
+ git checkout -b branchname --> to create new branch and checkout to that branch.
+ 
+ what is merge conflict and how do you resolve it?
+   merge conflict will occurs when the same piece of code is changed on two different branches , when we try to merge  these two branches , we will face the merge conflict.
+   
+   i dont know whos changes should i take in to the merge, i need to contact the devloper who has modified the branch1 and branch2 , they will discuss and they will give the change, i will put that in the file and continue.
+   [i will get to know the person who modified the code on branch1 and branch2 using git log command]
+ 
+ git reset: assignment.
+ 
+ 1.mixed 
+ 2.soft
+ 3.hard
+ 
+ what is git rebase?
+ 
+ git architecture
+ 
+ 1.localworkspace--> it is a local folder where we can modify the project related files.
+ 
+ 2.stagging area---> this is the intermideate area where we save the changes. we can commit to git repo only when we move the files to the stagging area.
+ 
+ 3.local git repo(non bare repo)-->it is localgit repository , once we move the files to the git repository , commit id will get created.
+ 
+ 4.remote git repository(bare repository)---> it is central repository we cant run any command or git opration. we can only push and pull the changes.
+ 
+ ============================================================================================================
+ how to edit the commit msg ---> git commit --amend
+ 
+ git stash
+ 
+ if i am working on one branch , in between if you get any critical work which needs to be fixed on another branch. in this case, before i switch to another branch, we need to stash it from current branch (stash will store the file in temporary area) . after completing  work on another branch switch it back to current branch and getstashed cahnges using git stash pop.(stagginh area)
+ 
+ to avoid the commit on the wrong branch we use git stash.
+ 
+ create some files
+ git add .
+ git stash
+ git checkout branch
+ after completing critical work in another branch , switch it back to current branch
+ git checkout branch
+ git stash pop
+ git reset HEAD
+ 
+ =============================================================================================
+ 
+ git clone ---> bringing the remote repository to the local workspace for the first time (if there is .git repo we cant clone)
+ 
+ git clone url
+ 
+ git push ---> is used to push the changes fron local repository to central repo
+ 
+ git push url
+ 
+ git pull--> git pull will bring the changes from the remote repository & merges to local workspace automatically.
+ 
+ git pull url
+ 
+ git fetch ---> git fetch will bring the changes from the remote repository and stores in a seprate branch we can review the changes and merge to required branch if it is required.
+ 
+ git fetch url or path.
+ 
+ 
+ ====================================================================================
