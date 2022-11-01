@@ -1,0 +1,343 @@
+LS="ls -l"
+$LS
+alias LS="ls -l"
+LS
+bash history ---> it stores all the command that were run on the server.
+
+========================================================================
+SHELL
+
+echo $SHELL --->to check the current shell
+chsh/lchsh ---> to switch the shell
+
+bash shell scripting 
+to perform the repetative task instead of running the command one by one we can write them in a file and we can 
+execute them. these files are called as shell scripts.
+
+the extension of the shell script is .sh
+c-program .c
+python .py 
+
+to execute shell script 
+1. ./<script.sh>
+2. sh <script.sh>
+3. bash <script.sh>
+
+#!/bin/bash
+
+shebang invokes the bash shell and if it is not used , the shell script will use the default shell.
+
+=======================================================================================================
+
+variable
+
+to access the value of the variable inside the script we have to use the "$" followed by the name.
+
+#!/bin/bash
+
+name="abc"
+place="bengaluru"
+
+echo "hi how are you"
+echo "this is $name, i am from $place"
+
+=================================================
+when we want to pass the variables during the runtime 
+
+#!/bin/bash
+
+echo "hi how are you"
+echo "this is $1, i am from $2, i am from $3"
+    $0        $1  $2  $3
+./example.sh abc ben cta
+
+=======================================================
+special variables
+
+$0--->the filename of the current script. example :    $0        $1  $2  $3
+                                                   ./example.sh abc ben cta
+$#---->the toatal number of arguments passed to the scripts
+$*---->gives all the arguments passed to script in a string format
+$@---->gives all the arguments passed to script in array format 
+
+$?---->to check the status of the last exectued commands
+$$---->to check the pid of the current running status
+$!---->to check the pid of the last process that went in to background
+=============================================================================	
+
+OPERATORS:
+
+1 . Arithmetic opertor { + - / \* }
+
+example
+
+#!/bin/bash
+
+num1=$1
+num2=$2
+
+sum=`expr $num1 + $num2`
+sum2=$(($num1 + $num2))
+mult=$(($num1 * $num2))
+
+echo "the sum of two numbers is $sum - $sum2"
+echo "the product of two numbers is $mut"
+
+=========================================================================
+
+a. numbers
+
+Equal ---> -eq
+Not Equal ---> -ne
+Less than --> -lt
+Greater than --> -gt
+Greater of equal to ---> -ge
+
+b. strings
+
+Equal ---> ==
+Not Equal ---> !=
+Less than --> <
+Greater than --> >
+Greater of equal to ---> >=
+
+IF condition
+
+if [condition]
+    [statements]
+else
+   [statements]
+fi  
+
+
+if [condition]; then
+    statements
+else 
+    statements
+fi	
+
+example
+
+1. to find the biggest of two numbers
+ 
+ 
+#!/bin/bash
+
+num1=$1
+num2=$2
+
+
+if   [ $num1 -gt $num2 ]; then
+    echo "$num1 is the biggest"
+else
+    echo "$num2 is the biggest"
+fi	
+====================================================================
+
+
+#!/bin/bash
+
+num1=$1
+num2=$2
+
+
+if  [ $num1 -eq $num2 ]; then
+    echo "both the numbers are equal"
+elif   [ $num1 -gt $num2 ]; then
+    echo "$num1 is the biggest"
+else
+    echo "$num2 is the biggest"
+fi
+
+============================
+
+#!/bin/bash
+
+set-x
+
+num1=$1
+num2=$2
+
+if [ $# -ne 2 ]; then
+    echo "please enter the two number"
+elif  [ $num1 -eq $num2 ]; then
+    echo "both the numbers are equal"
+elif   [ $num1 -gt $num2 ]; then
+    echo "$num1 is the biggest"
+else
+    echo "$num2 is the biggest"
+fi
+
+=================================================
+
+file operators
+
+[ -f $<file_name> ] ---> to check whether the given input is a file
+[ -d $<dir_name> ] ---> to check whether the given input is a directory
+
+[ -r $<file_name> ] ---> to check whether the given filename input has a read permission
+[ -w $<file_name> ] ---> to check whether the given filename input has a write permission
+[ -x $<file_name> ] ---> to check whether the given filename input has a execute permission
+
+
+[ -e $<file_name> ] ---> to check whether the given filename input exists 
+[ -s $<file_name> ] ---> to check whether the given filename input has some data
+
+
+example: shell script to check a file or directory
+
+#!/bin/bash
+
+echo "enter the fliename"
+read name
+
+if [ -f $name ]; then
+     echo "the $name is a file"
+elif [ -d $name ]; then
+     echo "the $name is a directory"
+else
+     echo "$name doesnot exist"
+fi	
+
+=======================================================================
+
+#!/bin/bash
+
+echo "enter the fliename"
+read name
+
+if [ -f $name ]; then
+     echo "the $name is a file"
+     if [ -r $name ]; then
+         echo "the file has a read permission"
+     else
+         echo "the file does not have a read permission"
+     fi
+     if [ -w $name ]; then
+         echo "the file has a write permission"
+     else
+         echo "the file does not have a write permission"
+     fi
+
+elif [ -d $name ]; then
+     echo "the $name is a directory"
+else
+     echo "$name doesnot exist"
+fi
+
+========================================================================== 
+
+set -x ---> prints commands and their arguments as they are exectued
+set -e ---> to stop a script immediately when a command exits with non zero status.($?)
+
+set -t ---> to exit after reading and executing only one command.
+
+
+==========================================================================
+
+
+While loop 
+
+syntax
+
+while [condition]
+do 
+   statements
+done
+
+while [condition]; do 
+   statements
+done
+
+Example: to find the sum of n numbers
+
+#!/bin/bash
+
+echo "enter the n value"
+read n
+sum=0
+while [ $n -gt 0 ]; do
+      sum=`expr $sum + $n`
+	  n=`expr $n -1`
+done
+echo "the sum of all the numbers is $sum"
+
+======================================================
+
+to find the factorial of the number
+
+
+
+#!/bin/bash
+
+n=$1
+fact=1
+
+while [ $n -gt 1 ]
+do
+       fact=`expr $n \* $fact`
+	   n=`expr $n - 1`
+done
+
+echo "the factorial of $1 is $fact"
+
+=======================================================
+
+Assignments
+
+1.to find the biggest of two numbers
+
+#!/bin/bash 
+ num1=$1
+ num2=$2
+ num3=$3
+ 
+     if [ $# -ne 3 ]; then
+        echo "Please enter three numbers"
+  elif  [ $num1 -eq $num2 ] && [ $num1 -eq $num3 ]; then
+       echo " All the numbers are equal" 
+  elif [ $num1 -gt $num2 ] && [ $num1 -gt $num3 ]; then 
+	   echo " $num1 is biggest"
+  elif [ $num2 -gt $num3 ]; then 
+	   echo " $num2 is biggest" 
+  else 
+	   echo "$num3 is the biggest" 
+fi	   
+
+==================================================================================
+syntax: while loop to read a file line by line
+
+while read <variable>
+do
+
+   echo $<variable>
+done <filename>
+
+cat <filename> ---> tp print the content of the file
+
+
+while read <line>
+do
+
+   echo $<line>
+done <filename>
+
+this is linux
+we are wrinting shell script
+
+1st titeration
+
+line="this is linux"
+
+2nd titeration
+line="we are wrinting shell script"
+
+Example : While loop to check the number of character in each line of the file
+
+#!/bin/bash
+
+while read line
+do
+   echo $line | wc -c
+   
+done < $1
